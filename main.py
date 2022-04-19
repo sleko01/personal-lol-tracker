@@ -1,7 +1,7 @@
 # this program needs to gather information from Riot API in and export them into a spreadsheet
 # stuff that needs to be gathered: date of game, length of game, gamemode, win/loss, number of kills,
 # deaths and assists, kda, cs, cs/min, champion I played, role I played, LP gain/loss
-# this project will one day be written properly (if you are reading this, you have the time so do it!
+# this project will one day be written properly (if you are reading this, you have the time so do it!)
 # information gathered: LP gain/loss, game duration
 
 from riotwatcher import LolWatcher, ApiError
@@ -12,6 +12,10 @@ class APIFetcher:
     def __init__(self, api_key, puuid):
         self.api_key = api_key
         self.puuid = puuid
+        self.set_api_key()
+
+    def set_api_key(self):
+        self.api_key = LolWatcher(self.api_key)
 
     def get_api_key(self):
         return self.api_key
