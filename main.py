@@ -1,11 +1,41 @@
 # this program needs to gather information from Riot API in and export them into a spreadsheet
 # stuff that needs to be gathered: date of game, length of game, gamemode, win/loss, number of kills,
 # deaths and assists, kda, cs, cs/min, champion I played, role I played, LP gain/loss
-
+# this project will one day be written properly (if you are reading this, you have the time so do it!
 # information gathered: LP gain/loss, game duration
 
 from riotwatcher import LolWatcher, ApiError
 import pandas as pd
+
+
+class APIFetcher:
+    def __init__(self, api_key, puuid):
+        self.api_key = api_key
+        self.puuid = puuid
+
+    def get_api_key(self):
+        return self.api_key
+
+    def get_puuid(self):
+        return self.puuid
+
+
+class Summoner(APIFetcher):
+    def __init__(self, name, region, api_key, puuid):
+        super().__init__(api_key, puuid)
+        self.name = name
+        self.region = region
+
+    def get_name(self):
+        return self.name
+
+    def get_region(self):
+        return self.region
+
+
+class Game(Summoner):
+    def __init__(self, name, region, api_key, puuid):
+        super().__init__(name, region, api_key, puuid)
 
 
 def main():
