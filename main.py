@@ -25,12 +25,16 @@ class Summoner(APIFetcher):
         super().__init__(api_key, puuid)
         self.name = name
         self.region = region
+        self.get_ranked_stats()
 
     def get_name(self):
         return self.name
 
     def get_region(self):
         return self.region
+
+    def get_ranked_stats(self):
+        ranked_stats = APIFetcher.get_api_key(self).league.by_summoner(self.get_region(), self.get_name())
 
 
 class Game(Summoner):
@@ -39,7 +43,7 @@ class Game(Summoner):
 
 
 def main():
-    api_key = 'RGAPI-19293cde-ce4d-4008-9525-904634a37d0c'
+    api_key = 'RGAPI-00b9193c-44c3-45a4-8c41-12961a5350de'
     watcher = LolWatcher(api_key)
     my_region = 'eun1'
 
