@@ -10,12 +10,8 @@ import pandas as pd
 
 class APIFetcher:
     def __init__(self, api_key, puuid):
-        self.api_key = api_key
+        self.api_key = LolWatcher(api_key)
         self.puuid = puuid
-        self.set_api_key()
-
-    def set_api_key(self):
-        self.api_key = LolWatcher(self.api_key)
 
     def get_api_key(self):
         return self.api_key
