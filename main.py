@@ -5,7 +5,7 @@
 # information gathered: LP gain/loss, game duration
 
 from riotwatcher import LolWatcher, ApiError
-import pandas as pd
+import pandas as pd  # this will be used to import data into excel spreadsheet
 
 
 class APIFetcher:
@@ -42,8 +42,22 @@ class Game(Summoner):
         super().__init__(name, region, api_key, puuid)
 
 
+class Champion:
+    def __init__(self, name):
+        self.name = name
+        self.get_champion_by_name()
+
+    def get_name(self):
+        return self.name
+
+    def get_champion_by_name(self):
+        watcher = LolWatcher()  # tu treba nekako dobit instancu APIFetchera i uzet API-key
+        versions = watcher.data_dragon.versions_for_region('eune')
+        champions_version = versions['n']['champion']
+        current_champ_list = watcher.data_dragon.champions(champions_version)
+
 def main():
-    api_key = 'RGAPI-00b9193c-44c3-45a4-8c41-12961a5350de'
+    api_key = 'RGAPI-f741c14e-c9be-43a2-90eb-8d34b3d4363b'
     watcher = LolWatcher(api_key)
     my_region = 'eun1'
 
@@ -72,6 +86,12 @@ def main():
     print(game_duration)
     gamemode = match_detail['info']['gameMode']
     print(gamemode)
+    versions = watcher.data_dragon.versions_for_region('eune')
+    champions_version = versions['n']['champion']
+    current_champ_list = watcher.data_dragon.champions(champions_version)
+    # print(current_champ_list)
+    rakan = current_champ_list['data']['Rakan']
+    print(rakan)
     return 0
 
 
