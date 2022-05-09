@@ -61,7 +61,7 @@ class Summoner:
 
     @staticmethod
     def get_last_game():
-        last_game = Summoner.matches[2]
+        last_game = Summoner.matches[0]
         match_detail = Summoner.watcher.match.by_id('europe', last_game)
         return match_detail
 
@@ -74,6 +74,12 @@ class Summoner:
         epoch_time = Summoner.get_last_game()['info']['gameStartTimestamp']
         local_time_of_game_start = time.strftime('%Y-%m-%d', time.localtime(epoch_time / 1000))
         return local_time_of_game_start
+
+    @staticmethod
+    def get_last_game_gamemode():
+        if Summoner.get_last_game()['info']['gameMode'] == "ARAM":
+            return "ARAM"
+        return "CLASSIC"  # API does not differentiate between different types of Summoner's Rift games
 
 
 class Champion:
@@ -137,10 +143,12 @@ def main():  # just a playground for testing functionality for now
     print(ja.get_last_game())
     print(ja.get_last_game_duration())
     print(ja.get_last_game_date())
+    print(ja.get_last_game_gamemode())
     syndra = Champion("Syndra")
     syndra_name = syndra.get_name()
     print(syndra_name)
     print(syndra.info)
+
     return 0
 
 
