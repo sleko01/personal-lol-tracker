@@ -16,7 +16,7 @@ def main():  # just a playground for testing functionality for now
     my_region = 'eun1'
 
     me = watcher.summoner.by_name(my_region, 'Darko Bundek')
-    puuid = '2iAwqtDQdcWJwIrQG9xO4s4pbMvthVjGxUak_3AMeQxdVGd_YZs5qZtqw8VLX7L8W6IxCr5oWYc32A'
+    puuid = config.APIFetcher.get_puuid()
     my_ranked_stats = watcher.league.by_summoner(my_region, me['id'])
     print(my_ranked_stats)
     print(me)
