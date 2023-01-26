@@ -29,28 +29,49 @@ class Summoner:
         self.info = Summoner.watcher.summoner.by_name(self.get_region(), self.get_name())
 
     def get_current_soloq_rank(self):
-        return str(self.get_ranked_stats()[1]['tier'] + self.get_ranked_stats()[1]['rank'])
+        try:
+            return str(self.get_ranked_stats()[1]['tier'] + self.get_ranked_stats()[1]['rank'])
+        except IndexError:
+            return "Player has not played ranked games."
 
     def get_current_flex_rank(self):
         return str(self.get_ranked_stats()[0]['tier'] + self.get_ranked_stats()[0]['rank'])
 
     def get_current_soloq_lp(self):
-        return self.get_ranked_stats()[1]['leaguePoints']
+        try:
+            return self.get_ranked_stats()[1]['leaguePoints']
+        except IndexError:
+            return "Player has no LP because they probably have not played ranked games."
 
     def get_current_flex_lp(self):
-        return self.get_ranked_stats()[0]['leaguePoints']
+        try:
+            return self.get_ranked_stats()[0]['leaguePoints']
+        except IndexError:
+            return "Player has no LP because they probably have not played ranked games."
 
     def get_current_soloq_wins(self):
-        return self.get_ranked_stats()[1]['wins']
+        try:
+            return self.get_ranked_stats()[1]['wins']
+        except IndexError:
+            return "Player has no ranked wins because they probably have not played ranked games."
 
     def get_current_soloq_losses(self):
-        return self.get_ranked_stats()[1]['losses']
+        try:
+            return self.get_ranked_stats()[1]['losses']
+        except IndexError:
+            return "Player has no ranked losses because they probably have not played ranked games."
 
     def get_current_flex_wins(self):
-        return self.get_ranked_stats()[0]['wins']
+        try:
+            return self.get_ranked_stats()[0]['wins']
+        except IndexError:
+            return "Player has no ranked wins because they probably have not played ranked games."
 
     def get_current_flex_losses(self):
-        return self.get_ranked_stats()[0]['losses']
+        try:
+            return self.get_ranked_stats()[0]['losses']
+        except IndexError:
+            return "Player has no ranked losses because they probably have not played ranked games."
 
     @staticmethod
     def get_last_game():
